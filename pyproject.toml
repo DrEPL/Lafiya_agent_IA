@@ -1,0 +1,12 @@
+[project]
+name = "lafiya-agent-ia"
+version = "0.1.0"
+requires-python = ">=3.13"
+
+dependencies = [
+    "fastapi[standard]>=0.162.2",
+    "ruff>=0.17.4",
+]
+
+[tool.fastapi]
+entrypoint = "main:app"
