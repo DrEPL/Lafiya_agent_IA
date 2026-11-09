@@ -20,7 +20,9 @@ env/
 !.env.example
 
 # Temporary and local text exports
+CDC*
 CDC_Text.txt
+recommandation.txt
 
 # IDE & OS
 .vscode/
