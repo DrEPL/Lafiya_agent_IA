@@ -1,12 +1,58 @@
 [project]
 name = "lafiya-agent-ia"
 version = "0.1.0"
+description = "Assistant WhatsApp d'information et d'orientation sur le diabète et l'hypertension artérielle"
+readme = "README.md"
 requires-python = ">=3.13"
 
 dependencies = [
-    "fastapi[standard]>=0.162.2",
-    "ruff>=0.17.4",
+    "fastapi[standard]>=0.115.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    "beanie>=2.0.0",
+    "motor>=3.6.0",
+    "taskiq>=0.11.0",
+    "taskiq-redis>=1.0.0",
+    "redis>=5.2.0",
+    "qdrant-client>=1.12.0",
+    "langgraph>=0.2.0",
+    "langchain-anthropic>=0.3.0",
+    "langchain-openai>=0.2.0",
+    "httpx>=0.28.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0",
+    "mypy>=1.13.0",
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+]
+scraper = [
+    "beautifulsoup4>=4.12.0",
+    "pypdf>=5.1.0",
+    "pdfplumber>=0.11.0",
 ]
 
 [tool.fastapi]
-entrypoint = "main:app"
+entrypoint = "app.main:app"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = ["B008"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
