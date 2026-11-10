@@ -1,0 +1,26 @@
+# ==============================================================================
+# Docker Compose - Environnement local Lafiya
+# Conformité CDC (§4.1, §4.2, §14.1) :
+# - Redis : géré localement (déduplication wamid 7j, file de tâches Taskiq, verrous)
+# - MongoDB : hébergé en ligne sur MongoDB Atlas (cluster cloud)
+# - Qdrant : hébergé en ligne sur Qdrant Cloud (collection vectorielle)
+# ==============================================================================
+
+services:
+  redis:
+    image: redis:8-alpine
+    container_name: lafiya_redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  redis_data:
