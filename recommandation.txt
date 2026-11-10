@@ -22,4 +22,9 @@ Voici une version complétée, prête à copier-coller :
 > - À la fin de chaque tâche, arrête-toi et propose-moi de faire un commit avant de commencer une autre tâche. Attends ma confirmation après le commit.
 > - Si je t'autorise, tu fais le commit.
 > - Ne signe jamais les commits et ne modifie pas la configuration Git pour les signer.
-> - Avant de committer, résume les fichiers modifiés, le résultat obtenu et les vérifications effectuées. Indique clairement les éventuels points non vérifiés ou problèmes restants.
+> - Avant de committer, lance obligatoirement les trois vérifications suivantes et corrige toute erreur signalée avant de poursuivre :
+>   1. `.venv\Scripts\python.exe -m ruff check app/` — lint (zéro erreur requise)
+>   2. `.venv\Scripts\python.exe -m ruff format --check app/` — formatage (zéro fichier mal formaté)
+>   3. `.venv\Scripts\python.exe -m ty check app/` — typage (zéro erreur requise)
+> - Résume les fichiers modifiés, le résultat obtenu et les vérifications effectuées. Indique clairement les éventuels points non vérifiés ou problèmes restants.
+> - Mettre à jour les fichiers README.md, decision.md
