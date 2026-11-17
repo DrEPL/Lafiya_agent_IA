@@ -5,6 +5,21 @@ Règle : si la réponse à "pourquoi ce choix ?" n'est pas ici, c'est une dette 
 
 ---
 
+## 2026-11-12 — ADR-010 : Constitution et pré-validation du corpus documentaire RAG (30 PDF officiels + 11 fiches Web)
+
+**Contexte** : Alimentation de la base de connaissances vectorielle Qdrant Cloud pour le RAG. Nécessité d'assurer une couverture médicale solide, rigoureuse et exclusivement fondée sur des sources d'autorité pour la prévention du diabète et de l'hypertension artérielle en Afrique / UEMOA.
+
+**Décision** :
+- Rejet formel du crawling Web non guidé afin d'exclure tout risque d'ingérer des sources commerciales, non vérifiées ou erronées.
+- Constitution d'un catalogue unifié à deux niveaux dans `scripts/ingest/sources.py` :
+  1. **11 fiches Web de référence** (OMS, OMS AFRO, IDF) scrapées et exportées en Markdown individuel dans `data/sources_markdown/`.
+  2. **30 guides cliniques complets en PDF** (rapports mondiaux, protocoles HEARTS, WHO PEN, lignes directrices sodium/sel, activité physique, obésité et Afrique) téléchargés directement depuis le référentiel institutionnel de l'OMS (`iris.who.int`) dans `data/pdf/` (~66 Mo).
+- Principe de pré-validation humaine : les documents bruts sont inspectés et validés par le développeur avant les étapes de découpage en chunks et d'embedding vectoriel.
+
+**Décideurs** : DrEPL (développeur) (2026-11-12).
+
+---
+
 ## 2026-11-09 — ADR-009 : Initialisation Git, GitHub et politique de commit sans signature
 
 **Contexte** : Démarrage du projet Lafiya. Mise sous contrôle de version du code, sécurisation des secrets et alignement avec le dépôt distant GitHub.

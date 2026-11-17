@@ -13,6 +13,15 @@ Assistant WhatsApp d'information et d'orientation sur le **diabète** et l'**hyp
 - **Worker** : Taskiq + LangGraph (triage, garde-fous, recherche vectorielle Qdrant, génération LLM Anthropic Claude).
 - **Stockage opérationnel & Logs** : MongoDB Atlas piloté par Beanie 2.x asynchrone (index TTL sur les événements).
 - **Cache & Déduplication** : Redis (TTL 7 jours sur les wamid).
+- **Base Vectorielle RAG** : Qdrant Cloud (`lafiya_corpus_who`, embeddings OpenAI `text-embedding-3-small`).
+
+## Corpus Documentaire & Ingestion RAG
+- **11 fiches Web officielles** (OMS, OMS AFRO, IDF) converties en Markdown individuel dans [`data/sources_markdown/`](data/sources_markdown/).
+- **30 guides cliniques complets en PDF** issus de l'OMS et d'OMS AFRO dans [`data/pdf/`](data/pdf/) (modules HEARTS, WHO PEN, lignes directrices hypertension, diabète, nutrition, sel, activité physique, obésité).
+- Commande de collecte intégrale du corpus :
+  ```powershell
+  .venv\Scripts\python.exe scripts/ingest/scraper.py
+  ```
 
 ## Documentation
 - [Journal des Décisions d'Architecture (ADR)](docs/decisions.md)
